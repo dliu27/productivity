@@ -1,12 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- <link href="main.css" rel="stylesheet" type="text/css" /> -->
 	<title>Work Hard.</title>
+	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+	<link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+	<p class="clock" id="time"></p>
+	<p class="clock" id="date"></p>
+	<script src="datetime.js" type="text/javascript"></script>
+
+	<p>What do you have to do?</p>
+
+	<input id="toDoInput" value='a'>
+	<script src = 'input.js' type='text/javascript'></script>
 
 	<h1>Todo List</h1>
+	
+	<textarea id='toDoList' rows="10" cols="50"></textarea>
+	<script src="toDoList.js" type="text/javascript"></script>
+
+
+
 <!-- 
 	<div class = "form">
 		<input type="text" name="name" autocomplete="off" required />
@@ -23,6 +38,8 @@
 	<button id="reset">Reset Time</button>
 	<script src="clock.js" type="text/javascript"></script>
 
+	<p class="quote">Do stuff early.</p>
+	<p class="quoteName">- David Liu, creator of productivity++</p>
 
 
 </body>

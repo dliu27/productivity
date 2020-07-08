@@ -1,10 +1,11 @@
 {
 	"manifest_version": 2,
 	"name": "productivity++",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "by dliu27.",
 	"permissions": [
-		"storage"
+		"storage",
+		"notifications"
 	],
 	"content_security_policy": "script-src 'self' 'sha256-WOdSzz11/3cpqOdrm89LBL2UPwEU9EhbDtMy2OciEhs='",
 	"chrome_url_overrides" : {
@@ -22,7 +23,8 @@
 		"128": "128.png"
 	},
 	"background": {
-		"scripts": ["background.js"]
+		"scripts": ["background.js"],
+		"persistent": false
 	},
 	"content_scripts": [
 		{
