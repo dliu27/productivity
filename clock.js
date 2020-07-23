@@ -1,87 +1,99 @@
 //Pomodoro Timer WIP
-
 var min = 0
 var sec = 0
 var placeholder = ''
 var minString = ''
 var secString = ''
-var done = false
+
 
 var timing = function(){
 
-  if (!localStorage.END) {
-    var end = Date.now() + 2700000
-    localStorage.setItem("END", end)
-  }
-  if (!localStorage.REST) {
-    var rest = end + 900000
-    localStorage.setItem("REST", rest)
-  }
+  var timerX = document.getElementById('timer')
 
-  if(!done){
-    var timerX = document.getElementById('timer')
-    min = Math.abs(Math.floor((localStorage.END - Date.now()) / 60000))
-    sec = Math.round(((localStorage.END - Date.now()) / 1000) % 60)
-    if (sec < 10 || sec == 60) {
-      placeholder = '0'
+  var buttonX = document.getElementById('reset')
+
+  buttonX.onclick = function () {
+
+    if(localStorage.Paused == 'false'){
+      localStorage.setItem('Paused', 'true')
     }
-    else {
-      placeholder = ''
+    else if (localStorage.Paused == 'true') {
+      localStorage.setItem('Paused', 'false')
+    }
+  
+  };
+
+  if(localStorage.Paused == 'true'){
+    timerX.style.color = 'purple'
+    timerX.innerHTML = 'Paused'
+    localStorage.removeItem('REST')
+    localStorage.removeItem('END')
+    localStorage.removeItem('Done')
+
+  }
+
+  else{
+    if (localStorage.Done == "false") {
+
+      if (!localStorage.END) {
+        timerX.innerHTML = 'Starting...'
+      }
+      else {
+        min = Math.floor(((localStorage.END - Date.now()) / 60000))
+        sec = Math.round(((localStorage.END - Date.now()) / 1000) % 60)
+
+        if (sec < 10 || sec == 0) {
+          placeholder = '0'
+        }
+
+        else {
+          placeholder = ''
+        }
+
+        if (localStorage.END - Date.now() < 250) {
+          timerX.innerHTML = 'Complete.'
+        }
+        else {
+          timerX.style.color = "red"
+
+          if (sec == 60) {
+            timerX.innerHTML = "Grinding for: " + String(min + 1) + ":" + '00'
+          }
+          else {
+            timerX.innerHTML = "Grinding for: " + String(min) + ":" + placeholder + String(sec)
+
+          }
+        }
+
+      }
     }
 
-    if (Date.now() > localStorage.END) {
-      timerX.innerHTML = 'Done.'
-      done = true
+    if (localStorage.Done == "true") {
+      min = Math.floor(((localStorage.REST - Date.now()) / 60000))
+      sec = Math.round(((localStorage.REST - Date.now()) / 1000) % 60)
+      if (sec < 10 || sec == 0) {
+        placeholder = '0'
+      }
 
-      var notifOptions = {
-        type: "basic",
-        title: "Done",
-        message: "Good work, relax for 15 minutes now.",
-        iconUrl: "128.png",
+      else {
+        placeholder = ''
+      }
+      if (localStorage.REST - Date.now() < 250) {
+        timerX.innerHTML = 'Complete.'
+      }
+      else {
+        timerX.style.color = 'green'
+        if (sec == 60) {
+          timerX.innerHTML = "Resting for: " + String(min + 1) + ":" + '00'
+        }
+        else {
+          timerX.innerHTML = "Resting for: " + String(min) + ":" + placeholder + String(sec)
+        }
 
       }
 
-      chrome.notifications.create(notifOptions);
-    }
-
-    else {
-      timerX.innerHTML = String(min) + ":" + placeholder + String(sec)
     }
   }
-
-  else if(done){
-    var timerX = document.getElementById('timer')
-    min = Math.abs(Math.floor((localStorage.REST - Date.now()) / 60000))
-    sec = Math.round(((localStorage.REST - Date.now()) / 1000) % 60)
-    if (sec < 10 || sec == 60) {
-      placeholder = '0'
-    }
-    else {
-      placeholder = ''
-    }
-
-    if (Date.now() > localStorage.REST) {
-      timerX.innerHTML = 'Done Rest.'
-      done = false
-      localStorage.clear()
-
-      var notifOptions = {
-        type: "basic",
-        title: "Started.",
-        message: "Back to the grind for 45 minutes now.",
-        iconUrl: "128.png",
-
-      }
-
-      chrome.notifications.create(notifOptions);
-    }
-
-    else {
-      timerX.innerHTML = String(min) + ":" + placeholder + String(sec)
-    }
-
-  }
-
 }
-
 setInterval(timing, 1000)
+

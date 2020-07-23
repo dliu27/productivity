@@ -1,17 +1,52 @@
+p{
+    text-align:center
+
+}
+
+h1{
+    text-align:center
+}
+
+h2{
+    text-align:center
+}
+
+button{
+    text-align:center
+}
+
+input{
+    text-align:center
+
+}
+
+textarea{
+    text-align:center
+
+}
+
+
 .quote {
-    font-size: 50px;
-    line-height: 30px;
+    font-size: 35px;
+    line-height: 20px;
     font-family: 'Comfortaa', cursive;
 }
 
 .quoteName {
-    font-size: 35px;
-    line-height: 30px;
+    font-size: 20px;
+    line-height: 20px;
     font-family: 'Comfortaa', cursive;
 }
 
 .clock {
-    font-size: 80px;
+    font-size: 40px;
     line-height: 0px;
     font-family: 'Comfortaa', cursive;
+}
+
+.timer {
+    font-size: 40px;
+    line-height: 0px;
+    font-family: 'Comfortaa', cursive;
+
 }
