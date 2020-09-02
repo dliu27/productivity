@@ -63,3 +63,40 @@ You can also put your images in the images folder and add their respective filen
 Enjoy the extension, I hope you found value in my work.
 
 If you have any questions, email me at davidliu0987@yahoo.ca
+
+## 🎞️ Gifs
+
+> **Randomizing Image Backgrounds On Load**
+
+![Randomizing Image Backgrounds](https://thumbs.gfycat.com/UnsightlyVictoriousIndianrhinoceros-size_restricted.gif)
+
+<br></br>
+<br></br>
+<br></br>
+
+> **Randomizing Infinite Gif Backgrounds On Load**
+
+![Randomizing Infinite Gif Backgrounds](https://thumbs.gfycat.com/EasygoingWelcomeJenny-size_restricted.gif)
+
+<br></br>
+<br></br>
+<br></br>
+
+> **Timer Demo**
+
+![Timer Demo](https://thumbs.gfycat.com/JadedPiercingAfricanjacana-size_restricted.gif)
+
+<br></br>
+<br></br>
+<br></br>
+
+> **Todo List Demo**
+
+![Todo List Demo](https://thumbs.gfycat.com/ConfusedSlipperyCuckoo-size_restricted.gif)
+
+
+
+
+
+
+
