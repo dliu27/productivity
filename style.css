@@ -4,6 +4,7 @@ p{
 }
 
 h1{
+    font-size:18px;
     text-align:center
 }
 
@@ -21,6 +22,7 @@ input{
 }
 
 textarea{
+    font-size:24px;
     text-align:center
 
 }
@@ -45,7 +47,7 @@ textarea{
 }
 
 .timer {
-    font-size: 40px;
+    font-size: 60px;
     line-height: 0px;
     font-family: 'Comfortaa', cursive;
 

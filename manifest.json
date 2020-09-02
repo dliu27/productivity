@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "productivity++",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "by dliu27.",
 	"permissions": [
 		"storage",
@@ -25,13 +25,5 @@
 	"background": {
 		"scripts": ["background.js"],
 		"persistent": false
-	},
-	"content_scripts": [
-		{
-			"matches": [
-				"<all_urls>"
-			],
-			"js": ["content.js"]
-		}
-	]
+	}
 }

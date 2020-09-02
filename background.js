@@ -2,10 +2,10 @@
 chrome.browserAction.onClicked.addListener(buttonClicked)
 
 function buttonClicked(tab) {
-    let msg = {
-        txt: 'colour'
+    let paragraphs = document.getElementsByTagName('body')
+    for (block of paragraphs) {
+        block.style['background-color'] = '#EFAE65'
     }
-    chrome.tabs.sendMessage(tab.id, msg)
 }
 
 var timing = function () {
@@ -20,8 +20,8 @@ var timing = function () {
         }
 
         if (!localStorage.END || !localStorage.REST) {
-            localStorage.setItem("END", Date.now() + 1800000)
-            localStorage.setItem("REST", Date.now() + 2100000)
+            localStorage.setItem("END", Date.now() + 2400000)
+            localStorage.setItem("REST", Date.now() + 2700000)
         }
 
         if (localStorage.Done == "false") {
@@ -66,17 +66,24 @@ var timing = function () {
 
 
 var getMinutes = function(){
-    if (localStorage.END) {
-        minLeft = Math.abs(Math.floor((localStorage.END - Date.now()) / 60000))
-    }
+    if (localStorage.Paused == 'false') {
+        if (localStorage.Done == 'false') {
+            minLeft = Math.floor((localStorage.END - Date.now()) / 60000)
+        }
 
-    else if (localStorage.REST) {
-        minLeft = Math.abs(Math.floor((localStorage.REST - Date.now()) / 60000))
+        else{
+            minLeft = Math.floor((localStorage.REST - Date.now()) / 60000)
+        }
+        chrome.browserAction.setBadgeBackgroundColor({ color: "green" });
+        chrome.browserAction.setBadgeText({ text: String(minLeft) })
     }
-    chrome.browserAction.setBadgeBackgroundColor({ color: "green" });
-    chrome.browserAction.setBadgeText({ text: String(minLeft) })
+    else{
+        chrome.browserAction.setBadgeText({ text: '' })
 
+    }
 }
 
 setInterval(timing, 1000)
 setInterval(getMinutes, 1000)
+
+
