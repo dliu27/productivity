@@ -26,13 +26,24 @@ var timing = function () {
 
         if (localStorage.Done == "false") {
 
-            if (Date.now() > localStorage.END) {
+            if ((localStorage.END - Date.now()) > 1199000 && (localStorage.END - Date.now()) < 1201000) {
+                var notifOptions1 = {
+                    type: "basic",
+                    title: "Done",
+                    message: "Good work, look at something 20 ft away.",
+                    iconUrl: "128.png",
+
+                }
+                chrome.notifications.create(notifOptions1);
+            }
+
+            else if (Date.now() > localStorage.END) {
                 localStorage.setItem("Done", "true")
 
                 var notifOptions1 = {
                     type: "basic",
                     title: "Done",
-                    message: "Good work, relax for 5 minutes now.",
+                    message: "Good work, look at something 20 ft away.",
                     iconUrl: "128.png",
 
                 }
@@ -85,5 +96,3 @@ var getMinutes = function(){
 
 setInterval(timing, 1000)
 setInterval(getMinutes, 1000)
-
-

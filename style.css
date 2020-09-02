@@ -1,54 +1,113 @@
 p{
-    text-align:center
+    text-align:center;
+    color:white;
+    
 
 }
 
 h1{
-    font-size:18px;
-    text-align:center
+    
+    font-size:20px;
+    text-align:center;
+    color:white;
 }
 
 h2{
-    text-align:center
+    text-align:center;
+    color:white;
 }
 
 button{
-    text-align:center
+    text-align:center;
+    color:white;
 }
 
 input{
-    text-align:center
+    text-align:center;
+    color:white;
 
 }
 
 textarea{
+    position: relative;
     font-size:24px;
-    text-align:center
+    text-align:center;
+    color: #2F4F4F;
+    border: 1px solid black;
+
+    
+}
+
+/* body {
+  background-image: url('images/1.jpg');
+  background-repeat: no-repeat;
+} */
+
+body{
+    /* background-image: url('https://i.imgur.com/3Jnlx8I.gif'); */
+    background-size: cover;
+      background-repeat: no-repeat;
 
 }
 
 
+button{
+
+    text-align:center;
+    color:black;
+
+}
+
 .quote {
-    font-size: 35px;
+        -webkit-text-stroke-width: 1.1px;
+    -webkit-text-stroke-color: #424242;
+    -webkit-text-fill-color: #ffffff;
+
+    font-size: 40px;
     line-height: 20px;
     font-family: 'Comfortaa', cursive;
+    color:white;
 }
 
 .quoteName {
-    font-size: 20px;
+        -webkit-text-stroke-width: 1.1px;
+    -webkit-text-stroke-color: #424242;
+    -webkit-text-fill-color: #ffffff;
+
+    font-size: 30px;
     line-height: 20px;
     font-family: 'Comfortaa', cursive;
+    color:white;
 }
 
 .clock {
-    font-size: 40px;
+            -webkit-text-stroke-width: 1.1px;
+    -webkit-text-stroke-color: #424242;
+    -webkit-text-fill-color: #ffffff;
+
+    font-size: 45px;
     line-height: 0px;
     font-family: 'Comfortaa', cursive;
 }
 
-.timer {
-    font-size: 60px;
+.clockA {
+    
+    font-size: 45px;
     line-height: 0px;
     font-family: 'Comfortaa', cursive;
+}
+
+
+
+
+.timer {
+        -webkit-text-stroke-width: 1.1px;
+    -webkit-text-stroke-color: #424242;
+    -webkit-text-fill-color: #ffffff;
+
+    font-size: 65px;
+    line-height: 0px;
+    font-family: 'Comfortaa', cursive;
+    color:white;
 
 }
