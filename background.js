@@ -10,7 +10,7 @@ function buttonClicked(tab) {
 
 var timing = function () {
 
-    if (!localStorage.Paused) {
+    if (localStorage.getItem('Paused') === null) {
         localStorage.setItem('Paused', 'false')
     }
 
@@ -43,7 +43,7 @@ var timing = function () {
                 var notifOptions1 = {
                     type: "basic",
                     title: "Done",
-                    message: "Good work, look at something 20 ft away.",
+                    message: "Good work, take a break now.",
                     iconUrl: "128.png",
 
                 }
@@ -62,7 +62,7 @@ var timing = function () {
                 var notifOptions2 = {
                     type: "basic",
                     title: "Started.",
-                    message: "Back to the grind for 30 minutes now.",
+                    message: "Back to the grind for 45 minutes now.",
                     iconUrl: "128.png",
 
                 }

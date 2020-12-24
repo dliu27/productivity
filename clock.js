@@ -1,13 +1,51 @@
-//Pomodoro Timer WIP
+//Pomodoro Timer
+
 var min = 0
 var sec = 0
 var placeholder = ''
 var minString = ''
 var secString = ''
 
-
 var timing = function(){
+  //DateTime
 
+  //A clock on the main screen
+
+  var today = new Date();
+  var h = today.getHours();
+  var m = today.getMinutes();
+  var s = today.getSeconds()
+
+  function checkTime(i) {
+    if (i < 10) { i = "0" + i };
+    return i;
+  }
+
+
+  if (h == 0) {
+    h = 12
+  }
+  m = checkTime(m);
+  s = checkTime(s);
+
+  document.getElementById("time").innerHTML = h + ":" + m + ":" + s;
+  
+  //Weather, Maybe later
+  // function weatherFetch() {
+  //   var key = '{yourkey}';
+  //   fetch('https://api.openweathermap.org/data/2.5/weather?q=Oakville&appid=00ded47b1315decbc8872f32c630ceaf')
+  //     .then(function (resp) { return resp.json() })
+  //     .then(function (data) {
+  //       console.log(data);
+  //     })
+  //     .catch(function () {
+
+  //     });
+  // }
+
+  // weatherFetch();
+
+  //Timer
   var timerX = document.getElementById('timer')
 
   var buttonX = document.getElementById('reset')
@@ -95,5 +133,5 @@ var timing = function(){
     }
   }
 }
-setInterval(timing, 1000)
 
+setInterval(timing, 1000)
