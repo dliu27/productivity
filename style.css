@@ -1,15 +1,17 @@
-button{
+body, html {
+    background-size: cover;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+  
+}
 
+button{
     text-align:center;
     color:black;
-
 }
 
 #quote {
-        -webkit-text-stroke-width: 1.1px;
-    -webkit-text-stroke-color: #424242;
-    -webkit-text-fill-color: #ffffff;
-
     font-size: 35px;
     line-height: 35px;
     font-family: 'Comfortaa', cursive;
@@ -17,10 +19,6 @@ button{
 }
 
 #quoteName {
-        -webkit-text-stroke-width: 1.1px;
-    -webkit-text-stroke-color: #424242;
-    -webkit-text-fill-color: #ffffff;
-
     font-size: 30px;
     line-height: 20px;
     font-family: 'Comfortaa', cursive;
@@ -28,24 +26,18 @@ button{
 }
 
 .clock {
-            -webkit-text-stroke-width: 1.1px;
-    -webkit-text-stroke-color: #424242;
-    -webkit-text-fill-color: #ffffff;
     text-align:center;
-
     font-size: 45px;
-    line-height: 0px;
+    line-height: 100%;
     font-family: 'Comfortaa', cursive;
+    color:white;
+
 }
 
 .clockA {
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #424242;
-
     text-align:center;
-
     font-size: 45px;
-    line-height: 0px;
+    line-height: 0%;
     font-family: 'Comfortaa', cursive;
 }
 
@@ -54,7 +46,7 @@ button{
 
 .timer {
     font-size: 65px;
-    line-height: 0px;
+    line-height: 100%;
     font-family: 'Comfortaa', cursive;
     color:white;
 
@@ -66,18 +58,14 @@ body {
     font-weight: 300;
     font-size: 1.5rem;
     background-color: var(--clr-primary);
-    color: var(--clr-light);
+    color: white;
     display: grid;
     
   }
   
 ol {
     list-style: none;
-    padding-left: 0;   
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #424242;
-    -webkit-text-fill-color: #ffffff;
- 
+    padding-left: 0;  
 }
 
   
@@ -86,8 +74,6 @@ ol {
     color: white;
 }
 
-label {
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #424242;
-    -webkit-text-fill-color: #ffffff;
+.reset {
+    line-height: 0%;
 }

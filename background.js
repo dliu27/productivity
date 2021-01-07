@@ -11,7 +11,7 @@ function buttonClicked(tab) {
 var timing = function () {
 
     if (localStorage.getItem('Paused') === null) {
-        localStorage.setItem('Paused', 'false')
+        localStorage.setItem('Paused', 'true')
     }
 
     if(localStorage.Paused == 'false'){
@@ -93,6 +93,28 @@ var getMinutes = function(){
 
     }
 }
+
+var filenames = [];
+chrome.runtime.getPackageDirectoryEntry(function(directoryEntry) {
+    directoryEntry.getDirectory('custom', {}, function(subDirectoryEntry) {
+        var directoryReader = subDirectoryEntry.createReader();
+        
+        directoryReader.readEntries(function (entries) {
+            for (var i = 0; i < entries.length; i++) {
+                filenames.push(entries[i].name);
+            }
+        });
+        
+    });
+});
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    sendResponse(filenames);
+});
+
+
+
+
 
 setInterval(timing, 1000)
 setInterval(getMinutes, 1000)
