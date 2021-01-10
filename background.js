@@ -101,7 +101,8 @@ chrome.runtime.getPackageDirectoryEntry(function(directoryEntry) {
         
         directoryReader.readEntries(function (entries) {
             for (var i = 0; i < entries.length; i++) {
-                filenames.push(entries[i].name);
+                if (entries[i].name != "READMECUSTOM.md")
+                    filenames.push(entries[i].name);
             }
         });
         
