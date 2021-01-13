@@ -95,10 +95,10 @@ var timing = function(){
           timerX.style.color = "red"
 
           if (sec == 60) {
-            timerX.innerHTML = "Grinding for: " + String(min + 1) + ":" + '00'
+            timerX.innerHTML = "Working for: " + String(min + 1) + ":" + '00'
           }
           else {
-            timerX.innerHTML = "Grinding for: " + String(min) + ":" + placeholder + String(sec)
+            timerX.innerHTML = "Working for: " + String(min) + ":" + placeholder + String(sec)
 
           }
         }

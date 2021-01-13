@@ -10,6 +10,18 @@ function buttonClicked(tab) {
 
 var timing = function () {
 
+    workTime = 2400000
+    restTime = 300000
+    millisecondsToMinutesConstant = 60000
+
+    var millisecondsToMinutes = function(milliseconds){
+        return milliseconds/millisecondsToMinutesConstant
+    }
+
+    var minutesToMilliseconds = function(minutes){
+        return minutes*millisecondsToMinutesConstant
+    }
+
     if (localStorage.getItem('Paused') === null) {
         localStorage.setItem('Paused', 'true')
     }
@@ -20,36 +32,32 @@ var timing = function () {
         }
 
         if (!localStorage.END || !localStorage.REST) {
-            localStorage.setItem("END", Date.now() + 2400000)
-            localStorage.setItem("REST", Date.now() + 2700000)
+            localStorage.setItem("END", Date.now() + workTime)
+            localStorage.setItem("REST", Date.now() + workTime + restTime)
         }
 
         if (localStorage.Done == "false") {
 
-            if ((localStorage.END - Date.now()) > 1199000 && (localStorage.END - Date.now()) < 1201000) {
+            if ((localStorage.END - Date.now()) > 1199000 && (localStorage.END - Date.now()) < 1200000) {
                 var notifOptions1 = {
                     type: "basic",
                     title: "Done",
-                    message: "Good work, look at something 20 ft away.",
+                    message: "Good work, remember to follow the 20-20-20 rule.",
                     iconUrl: "128.png",
-
                 }
-                chrome.notifications.create(notifOptions1);
             }
-
             else if (Date.now() > localStorage.END) {
                 localStorage.setItem("Done", "true")
 
                 var notifOptions1 = {
                     type: "basic",
                     title: "Done",
-                    message: "Good work, take a break now.",
+                    message: "Good work, take a " + millisecondsToMinutes(restTime) + " minute break now.",
                     iconUrl: "128.png",
 
                 }
-
-                chrome.notifications.create(notifOptions1);
             }
+            chrome.notifications.create(notifOptions1);
         }
 
         else if (localStorage.Done == "true") {
@@ -62,7 +70,7 @@ var timing = function () {
                 var notifOptions2 = {
                     type: "basic",
                     title: "Started.",
-                    message: "Back to the grind for 45 minutes now.",
+                    message: "Back to work for " + millisecondsToMinutes(workTime) + " minutes now.",
                     iconUrl: "128.png",
 
                 }
@@ -79,7 +87,7 @@ var timing = function () {
 var getMinutes = function(){
     if (localStorage.Paused == 'false') {
         if (localStorage.Done == 'false') {
-            minLeft = Math.floor((localStorage.END - Date.now()) / 60000)
+            minLeft = Math.floor((millisecondsToMinutes(localStorage.END - Date.now())))
         }
 
         else{
@@ -90,7 +98,6 @@ var getMinutes = function(){
     }
     else{
         chrome.browserAction.setBadgeText({ text: '' })
-
     }
 }
 
