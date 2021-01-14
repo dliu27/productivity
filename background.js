@@ -1,43 +1,41 @@
-//Background scripts, button, notifs, badges
-chrome.browserAction.onClicked.addListener(buttonClicked)
+//Background script: notifs, badges
 
-function buttonClicked(tab) {
-    let paragraphs = document.getElementsByTagName('body')
-    for (block of paragraphs) {
-        block.style['background-color'] = '#EFAE65'
-    }
+// constants for time
+workTime = 2400000
+restTime = 300000
+millisecondsToMinutesConstant = 60000
+
+// functions to convert times
+var millisecondsToMinutes = function(milliseconds){
+    return milliseconds/millisecondsToMinutesConstant
+}
+
+var minutesToMilliseconds = function(minutes){
+    return minutes*millisecondsToMinutesConstant
 }
 
 var timing = function () {
-
-    workTime = 2400000
-    restTime = 300000
-    millisecondsToMinutesConstant = 60000
-
-    var millisecondsToMinutes = function(milliseconds){
-        return milliseconds/millisecondsToMinutesConstant
-    }
-
-    var minutesToMilliseconds = function(minutes){
-        return minutes*millisecondsToMinutesConstant
-    }
-
+    // make Paused variable in localStorage
     if (localStorage.getItem('Paused') === null) {
         localStorage.setItem('Paused', 'true')
     }
 
+    // if Pomodoro Timer started, handle events accordingly 
     if(localStorage.Paused == 'false'){
+        // make Done variable in localStorage
         if (!localStorage.Done) {
             localStorage.setItem("Done", 'false')
         }
 
+        // make END and REST variables in localStorage
         if (!localStorage.END || !localStorage.REST) {
             localStorage.setItem("END", Date.now() + workTime)
             localStorage.setItem("REST", Date.now() + workTime + restTime)
         }
-
+        
+        // notifications
         if (localStorage.Done == "false") {
-
+            // 20-20-20 rule
             if ((localStorage.END - Date.now()) > 1199000 && (localStorage.END - Date.now()) < 1200000) {
                 var notifOptions1 = {
                     type: "basic",
@@ -47,6 +45,7 @@ var timing = function () {
                 }
             }
             else if (Date.now() > localStorage.END) {
+                // notification for Pomodoro Timer finished
                 localStorage.setItem("Done", "true")
 
                 var notifOptions1 = {
@@ -62,6 +61,7 @@ var timing = function () {
 
         else if (localStorage.Done == "true") {
             if (Date.now() > localStorage.REST) {
+                // if rest is over, reset all values and send notif
                 localStorage.setItem("Done", "false")
 
                 localStorage.removeItem("END")
@@ -74,17 +74,14 @@ var timing = function () {
                     iconUrl: "128.png",
 
                 }
-
                 chrome.notifications.create(notifOptions2);
             }
         }
-
     }
-
 }
 
-
-var getMinutes = function(){
+// gets the minutes left of the Pomodoro Timer and displays it as text in the P++ badge
+var getMinutesLeft = function(){
     if (localStorage.Paused == 'false') {
         if (localStorage.Done == 'false') {
             minLeft = Math.floor((millisecondsToMinutes(localStorage.END - Date.now())))
@@ -101,6 +98,7 @@ var getMinutes = function(){
     }
 }
 
+// read filenames in directory custom
 var filenames = [];
 chrome.runtime.getPackageDirectoryEntry(function(directoryEntry) {
     directoryEntry.getDirectory('custom', {}, function(subDirectoryEntry) {
@@ -116,13 +114,10 @@ chrome.runtime.getPackageDirectoryEntry(function(directoryEntry) {
     });
 });
 
+// send filenames to visuals.js
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     sendResponse(filenames);
 });
 
-
-
-
-
 setInterval(timing, 1000)
-setInterval(getMinutes, 1000)
+setInterval(getMinutesLeft, 1000)

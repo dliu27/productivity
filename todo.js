@@ -111,7 +111,7 @@ else{
   //if no localStorage, create None task
   var noneOption = document.createElement('option');
   noneOption.id = 0
-  noneOption.appendChild(document.createTextNode("None"));
+  noneOption.appendChild(document.createTextNode("Tasks:"));
   document.getElementById("taskList").appendChild(noneOption); 
   //save taskId to localStorage
   saveTaskId()
@@ -127,6 +127,11 @@ document.addEventListener('keydown', (e) => {
       document.getElementById("taskList").selectedIndex -= 1
       changeTask()
     }
+    // wrap to last element
+    else{
+      document.getElementById("taskList").selectedIndex = tasks.length - 1
+      changeTask()
+    }
   }
   if (e.code === "ArrowDown"){
     //prevents double scrolling
@@ -135,7 +140,14 @@ document.addEventListener('keydown', (e) => {
       document.getElementById("taskList").selectedIndex += 1
       changeTask()
     }
+    // wrap to first element
+    else {
+      document.getElementById("taskList").selectedIndex = 0
+      changeTask()
+    }
   }  
+
+  //
   if(document.activeElement != document.getElementById("todoInput")){
     if(e.code === "Enter"){
       document.getElementById("todoInput").focus()
@@ -149,6 +161,7 @@ document.addEventListener('keydown', (e) => {
       }
     }
   }
+  // unfocus todoInput on esc
   if(document.activeElement == document.getElementById("todoInput")){
     if(e.code === "Escape"){
       document.getElementById("todoInput").blur()
@@ -158,7 +171,11 @@ document.addEventListener('keydown', (e) => {
 
 document.getElementById("todoInput").addEventListener("keypress", addTodo);
 document.getElementById("addButton").addEventListener("click", promptTask)
-document.getElementById("deleteButton").addEventListener("click", deleteLastTask)
+document.getElementById("deleteButton").addEventListener("click", 
+function(){
+  if(confirm("Are you sure you want to delete this last task?") == true){
+    deleteLastTask()
+  }})
 document.getElementById("taskList").addEventListener("change", changeTask)
 
 //adds a todo if enter is pressed in the todoInput box

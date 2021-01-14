@@ -1,4 +1,4 @@
-//Pomodoro Timer
+// timing events
 
 var min = 0
 var sec = 0
@@ -7,9 +7,7 @@ var minString = ''
 var secString = ''
 
 var timing = function(){
-  //DateTime
-
-  //A clock on the main screen
+  // clock on the main screen
 
   var today = new Date();
   var h = today.getHours();
@@ -45,7 +43,7 @@ var timing = function(){
 
   // weatherFetch();
 
-  //Timer
+  // Pomodoro Timer
   var timerX = document.getElementById('timer')
 
   var buttonX = document.getElementById('reset')

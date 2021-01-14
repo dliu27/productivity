@@ -1,5 +1,6 @@
-
+// send message to background.js that visuals.js has loaded
 chrome.runtime.sendMessage("loaded", function(response) {
+  // read response
   if (response.length > 0){
     document.body.style.backgroundImage = "url(custom/" + response[Math.floor(Math.random() * response.length)] + ")"
   }
@@ -14,9 +15,6 @@ chrome.runtime.sendMessage("loaded", function(response) {
   }
 
 });
-
-
-
 
 //Quote Randomizer
 fetch('quotes.txt').then(response => response.text()).then(response => {
