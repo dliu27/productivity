@@ -4,6 +4,7 @@
 workTime = 2400000
 restTime = 300000
 millisecondsToMinutesConstant = 60000
+millisecondsToHoursConstant = 3600000
 
 // functions to convert times
 var millisecondsToMinutes = function(milliseconds){
@@ -15,27 +16,40 @@ var minutesToMilliseconds = function(minutes){
 }
 
 var timing = function () {
+    if (!localStorage.TimeWorked) {
+        localStorage.setItem("TimeWorked", 0)
+    }
+    if (!localStorage.WorkFinished) {
+        localStorage.setItem("WorkFinished", "false")
+    }
     // make Paused variable in localStorage
-    if (localStorage.getItem('Paused') === null) {
+    if (!localStorage.Paused) {
         localStorage.setItem('Paused', 'true')
+    }
+
+    if (!localStorage.workLogged) {
+        localStorage.setItem('workLogged', 'false')
     }
 
     // if Pomodoro Timer started, handle events accordingly 
     if(localStorage.Paused == 'false'){
+        localStorage.removeItem("workLogged")  
         // make Done variable in localStorage
         if (!localStorage.Done) {
             localStorage.setItem("Done", 'false')
         }
-
+        
         // make END and REST variables in localStorage
-        if (!localStorage.END || !localStorage.REST) {
+        if (!localStorage.END || !localStorage.REST || !localStorage.START) {
+            localStorage.setItem("START", Date.now())
             localStorage.setItem("END", Date.now() + workTime)
             localStorage.setItem("REST", Date.now() + workTime + restTime)
         }
         
         // notifications
         if (localStorage.Done == "false") {
-            // 20-20-20 rule
+            // 20-20-20 rule: not used anymore
+            /*
             if ((localStorage.END - Date.now()) > 1199000 && (localStorage.END - Date.now()) < 1200000) {
                 var notifOptions1 = {
                     type: "basic",
@@ -44,7 +58,8 @@ var timing = function () {
                     iconUrl: "128.png",
                 }
             }
-            else if (Date.now() > localStorage.END) {
+            */
+            if (Date.now() > localStorage.END) {
                 // notification for Pomodoro Timer finished
                 localStorage.setItem("Done", "true")
 
@@ -77,6 +92,12 @@ var timing = function () {
                 chrome.notifications.create(notifOptions2);
             }
         }
+    } else if (localStorage.Paused == 'true'){
+        if (localStorage.START != null && localStorage.workLogged == "false") {
+            var timeWorked = parseInt(localStorage.getItem("TimeWorked")) + (Date.now() - localStorage.getItem("START"))   
+            localStorage.setItem("TimeWorked", timeWorked)      
+            localStorage.setItem("workLogged", true)  
+        }
     }
 }
 
@@ -103,21 +124,20 @@ var filenames = [];
 chrome.runtime.getPackageDirectoryEntry(function(directoryEntry) {
     directoryEntry.getDirectory('custom', {}, function(subDirectoryEntry) {
         var directoryReader = subDirectoryEntry.createReader();
-        
+
         directoryReader.readEntries(function (entries) {
             for (var i = 0; i < entries.length; i++) {
                 if (entries[i].name != "READMECUSTOM.md")
                     filenames.push(entries[i].name);
             }
         });
-        
+    });
+    // send filenames to visuals.js
+    chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+        sendResponse(filenames);
     });
 });
 
-// send filenames to visuals.js
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    sendResponse(filenames);
-});
 
 setInterval(timing, 1000)
 setInterval(getMinutesLeft, 1000)

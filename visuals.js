@@ -13,16 +13,4 @@ chrome.runtime.sendMessage("loaded", function(response) {
     // var gifs = ["https://i.imgur.com/emSvYMy.gif", "https://i.imgur.com/RktuAes.gif", "https://i.imgur.com/OBXSp8n.gif", "https://i.imgur.com/HTyT6I7.gif", "https://i.imgur.com/HufwA6q.gif", "https://i.imgur.com/91U2BYA.gif"];
     // document.body.style.backgroundImage = "url(" + gifs[Math.floor(Math.random() * gifs.length)] + ")"
   }
-
 });
-
-//Quote Randomizer
-fetch('quotes.txt').then(response => response.text()).then(response => {
-  var quotes = response.split("\n")
-
-  var quotePos = Math.floor(Math.random() * (quotes.length / 2)) * 2
-
-  document.getElementById("quote").innerHTML = quotes[quotePos]
-  document.getElementById("quoteName").innerHTML = quotes[quotePos + 1]
-})
-

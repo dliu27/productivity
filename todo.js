@@ -1,6 +1,6 @@
 var tasks = []
 var taskId = 1
-var allData = [{name:"None", id:0, todo:[]}]
+var allData = [{name:"Tasks:", id:0, todo:[]}]
 var allItems = []
 var currentTaskId = 0
 const listsContainer = document.querySelector('[data-lists]')
