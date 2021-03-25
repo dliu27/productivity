@@ -12,7 +12,7 @@ Hi! This is my personal take on a new tab productivity chrome extension. Based o
 
 -Time in minutes shows as a button on the taskbar
 
--Personal Todo List (Store up to 6 items in one compact box, easily viewable every new tab)
+-Always saved Personal todo list with multiple categories
 
 -Images / Looping Gif Backgrounds (randomized every load)
 
